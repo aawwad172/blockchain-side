@@ -1,9 +1,16 @@
 const express = require("express");
 const { Web3 } = require("web3");
+const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
 const port = 3000;
+const corsOptions = {
+	origin: "http://localhost:5173",
+	optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.INFURA_URL));
 
@@ -480,7 +487,40 @@ async function sendTransaction(data) {
 		throw error;
 	}
 }
+app.get("/elections", async (req, res) => {
+	try {
+		const elections = await contract.methods.getAllElections().call();
+		console.log("Elections retrieved successfully");
+		const ids = elections.ids;
+		console.log(ids);
+		const titles = elections.titles;
+		console.log(titles);
+		const startDate = elections.startDates;
+		const endDate = elections.endDates;
+		const numberOfCandidates = elections.numberOfCandidates;
+		const totalVotes = elections.totalVotes;
+		console.log("Elections retrieved successfully" + elections);
 
+		allElections = [];
+
+		for (let i = 0; i < ids.length; i++) {
+			let election = {
+				id: ids[i],
+				title: titles[i],
+				startDate: startDate[i],
+				endDate: endDate[i],
+				numberOfCandidates: numberOfCandidates[i],
+				totalVotes: totalVotes[i],
+			};
+			allElections.push(election);
+		}
+
+		res.json(allElections);
+	} catch (error) {
+		console.error("Error fetching all elections:", error);
+		res.status(500).send(error.toString());
+	}
+});
 app.post("/election", async (req, res) => {
 	console.log("POST /election called");
 	try {
