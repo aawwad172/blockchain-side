@@ -1,7 +1,7 @@
 import express from "express";
 import { Web3 } from "web3";
 import cors from "cors";
-import { ContractABI } from "./contractDetails.js";
+import { ContractABI } from "./ContractABI.js";
 import dotenv from "dotenv";
 dotenv.config();
 

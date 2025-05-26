@@ -1,5 +1,15 @@
 # Blockchain
 
+## Table of Contents
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Setup](#setup)
+- [Running the Blockchain Service](#running-the-blockchain-service)
+- [Interacting with the Smart Contract](#interacting-with-the-smart-contract)
+- [Contract ABI Documentation](docs/CONTRACT_ABI.md)
+- [Dependencies](#dependencies)
+- [License](#license)
+
 ## Overview
 This is the blockchain component for the E-voting system. The smart contracts are written in Solidity, and Web3.js is used to interact with the contracts. The backend utilizes Node.js, Express.js, CORS, and dotenv.
 
@@ -60,6 +70,3 @@ The backend service exposes endpoints that allow interaction with the smart cont
 
 ## License
 This project is licensed under the MIT License.
-```
-
-This README file provides a clear overview of the blockchain component, including setup instructions, MetaMask and Infura integration, running the service, interacting with smart contracts, and testing. It also lists dependencies and licensing information.
